@@ -37,7 +37,7 @@ export function ThemeSwitcher() {
         <Icon size={18} />
       </button>
       {open && (
-        <div className="absolute start-0 mt-2 w-36 animate-scale-in rounded-xl border border-slate-200/80 bg-white p-1 shadow-soft-lg dark:border-surface-dark-border dark:bg-surface-dark-subtle">
+        <div className="absolute end-0 mt-2 w-36 animate-scale-in rounded-xl border border-slate-200/80 bg-white p-1 shadow-soft-lg dark:border-surface-dark-border dark:bg-surface-dark-subtle">
           {([
             { value: 'light', label: t('theme.light'), icon: Sun },
             { value: 'dark', label: t('theme.dark'), icon: Moon },
