@@ -159,12 +159,12 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
         </div>
 
                <div className="flex items-center justify-between border-t border-slate-200/80 px-4 py-2.5 text-2xs text-slate-400 dark:border-surface-dark-border">
-          <span className="flex items-center gap-2">
-            <kbd className="rounded border border-slate-200 px-1.5 py-0.5 font-mono dark:border-surface-dark-border">↑↓</kbd>
-            to navigate
-            <kbd className="ms-2 rounded border border-slate-200 px-1.5 py-0.5 font-mono dark:border-surface-dark-border">↵</kbd>
-            to select
-          </span>
+          <span className="hidden sm:flex items-center gap-2">
+  <kbd className="rounded border border-slate-200 px-1.5 py-0.5 font-mono dark:border-surface-dark-border">↑↓</kbd>
+  to navigate
+  <kbd className="ms-2 rounded border border-slate-200 px-1.5 py-0.5 font-mono dark:border-surface-dark-border">↵</kbd>
+  to select
+</span>
 
           <button
             onClick={() => {
