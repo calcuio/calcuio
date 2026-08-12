@@ -33,7 +33,11 @@ export function LanguageSwitcher() {
         <Globe size={18} />
       </button>
       {open && (
-        <div className="absolute left-0 mt-2 w-36 animate-scale-in rounded-xl border border-slate-200/80 bg-white p-1 shadow-soft-lg dark:border-surface-dark-border dark:bg-surface-dark-subtle">
+        <div
+  className={`absolute mt-2 w-36 animate-scale-in rounded-xl border border-slate-200/80 bg-white p-1 shadow-soft-lg dark:border-surface-dark-border dark:bg-surface-dark-subtle ${
+    locale === 'ar' ? 'right-0' : 'left-0'
+  }`}
+>
           {locales.map((l) => (
             <button
               key={l}
