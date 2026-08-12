@@ -70,7 +70,6 @@ export function Header({ onOpenSearch, onOpenMobileMenu }: HeaderProps) {
             <Search size={15} />
             <span className="hidden sm:inline">{t('search.placeholder.short')}</span>
             <kbd className="ms-auto hidden rounded border border-slate-200 px-1.5 py-0.5 font-mono text-2xs text-slate-400 dark:border-surface-dark-border sm:inline">
-              ⌘K
             </kbd>
           </button>
 
@@ -81,7 +80,7 @@ export function Header({ onOpenSearch, onOpenMobileMenu }: HeaderProps) {
 
           <button
             onClick={onOpenMobileMenu}
-            className="btn btn-ghost p-2 md:hidden"
+            className="btn btn-ghost p-2"
             aria-label={t('nav.menu')}
           >
             <Menu size={20} />
@@ -123,7 +122,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-[90] md:hidden" role="dialog" aria-modal="true" aria-label={t('nav.menu')}>
+    <div className="fixed inset-0 z-[90]" role="dialog" aria-modal="true" aria-label={t('nav.menu')}>
       <div className="absolute inset-0 bg-slate-900/30 backdrop-blur-sm animate-fade-in" onClick={onClose} />
       <div className="absolute end-0 top-0 h-full w-72 max-w-[85vw] animate-slide-down overflow-y-auto bg-white p-4 shadow-soft-xl dark:bg-surface-dark-subtle">
         <div className="mb-4 flex items-center justify-between">
