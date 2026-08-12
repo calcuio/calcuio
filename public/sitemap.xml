@@ -4,41 +4,93 @@
   <url>
     <loc>https://calcuio.com/</loc>
   </url>
-
   <url>
     <loc>https://calcuio.com/tools</loc>
   </url>
-
   <url>
     <loc>https://calcuio.com/categories</loc>
   </url>
-
   <url>
     <loc>https://calcuio.com/popular</loc>
   </url>
-
   <url>
     <loc>https://calcuio.com/about</loc>
   </url>
-
   <url>
     <loc>https://calcuio.com/faq</loc>
   </url>
-
   <url>
     <loc>https://calcuio.com/blog</loc>
   </url>
-
   <url>
     <loc>https://calcuio.com/contact</loc>
   </url>
-
   <url>
     <loc>https://calcuio.com/privacy</loc>
   </url>
-
   <url>
     <loc>https://calcuio.com/terms</loc>
+  </url>
+
+  <url>
+    <loc>https://calcuio.com/tools/jpg-to-pdf</loc>
+  </url>
+  <url>
+    <loc>https://calcuio.com/tools/image-compressor</loc>
+  </url>
+  <url>
+    <loc>https://calcuio.com/tools/image-resizer</loc>
+  </url>
+  <url>
+    <loc>https://calcuio.com/tools/heic-to-jpg</loc>
+  </url>
+  <url>
+    <loc>https://calcuio.com/tools/pdf-compressor</loc>
+  </url>
+  <url>
+    <loc>https://calcuio.com/tools/json-formatter</loc>
+  </url>
+  <url>
+    <loc>https://calcuio.com/tools/word-counter</loc>
+  </url>
+  <url>
+    <loc>https://calcuio.com/tools/png-to-jpg</loc>
+  </url>
+  <url>
+    <loc>https://calcuio.com/tools/jpg-to-webp</loc>
+  </url>
+  <url>
+    <loc>https://calcuio.com/tools/favicon-generator</loc>
+  </url>
+  <url>
+    <loc>https://calcuio.com/tools/png-to-webp</loc>
+  </url>
+  <url>
+    <loc>https://calcuio.com/tools/webp-to-jpg</loc>
+  </url>
+  <url>
+    <loc>https://calcuio.com/tools/pdf-to-jpg</loc>
+  </url>
+  <url>
+    <loc>https://calcuio.com/tools/merge-pdf</loc>
+  </url>
+  <url>
+    <loc>https://calcuio.com/tools/json-validator</loc>
+  </url>
+  <url>
+    <loc>https://calcuio.com/tools/uuid-generator</loc>
+  </url>
+  <url>
+    <loc>https://calcuio.com/tools/base64-encoder-decoder</loc>
+  </url>
+  <url>
+    <loc>https://calcuio.com/tools/character-counter</loc>
+  </url>
+  <url>
+    <loc>https://calcuio.com/tools/case-converter</loc>
+  </url>
+  <url>
+    <loc>https://calcuio.com/tools/hex-to-rgb</loc>
   </url>
 
 </urlset>
