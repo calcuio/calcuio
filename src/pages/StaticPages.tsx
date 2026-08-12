@@ -95,37 +95,35 @@ export function FaqPage() {
 }
 
 export function BlogPage() {
-  const { t } = useI18n();
-  useSEO({ title: `${t('page.blog.title')} | Calcuio`, description: t('page.blog.sub'), canonical: '/blog' });
-
   return (
     <div className="container-page py-6 sm:py-8">
-      <h1 className="text-2xl font-bold text-slate-900 dark:text-white">{t('page.blog.title')}</h1>
-      <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{t('page.blog.sub')}</p>
+      <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Blog</h1>
+      <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+        Guides and articles about tools and productivity.
+      </p>
       
       <div className="mt-8 grid gap-6 md:grid-cols-1">
         <article className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm dark:border-surface-dark-border dark:bg-surface-dark/50">
-          <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">دليل سريع</span>
+          <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">Guide</span>
           <h2 className="mt-2 text-xl font-bold text-slate-900 dark:text-white">
-            أسهل طريقة لتحويل صور الآيفون HEIC إلى JPG بدون برامج
+            How to Convert HEIC to JPG Images Easily
           </h2>
           <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-            هل تواجه مشكلة في فتح صور الآيفون (HEIC) على الويندوز أو الأجهزة الأخرى؟ يمكنك تحويل ملفاتك إلى JPG خلال ثوانٍ وبدون الحاجة لرفع الملفات على سيرفرات خارجية لضمان خصوصيتك.
+            Convert iPhone HEIC photos to JPG directly in your browser. Fast, free, and 100% private with no server uploads.
           </p>
           <div className="mt-4 flex items-center justify-between">
             <a 
               href="/tools/heic-to-jpg" 
               className="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-400"
             >
-              استخدم الأداة الآن ←
+              Use Tool Now &rarr;
             </a>
-            <span className="text-xs text-slate-400">12 أغسطس 2026</span>
+            <span className="text-xs text-slate-400">August 2026</span>
           </div>
         </article>
       </div>
     </div>
   );
-}
 }
 
 export function NotFoundPage() {
