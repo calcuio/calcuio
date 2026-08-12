@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Search, X, ArrowRight, CornerDownLeft } from 'lucide-react';
 import { useI18n } from '@/i18n/I18nContext';
 import { searchTools, getSuggestions } from '@/lib/search';
@@ -88,25 +88,24 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
         </div>
 
         <div className="max-h-[60vh] overflow-y-auto scrollbar-thin p-2">
-          {query && results.length === 0 && (
-            <div className="py-12 text-center">
-              <p className="text-sm text-slate-400">{t('search.empty')}</p>
-            </div>
-          )}
-
           {!query && (
-            <div className="py-3">
-              <p className="px-3 pb-2 text-2xs font-semibold uppercase tracking-wider text-slate-400">Popular tools</p>
-              {categories.slice(0, 3).map((cat) => (
-                <div key={cat.id} className="mb-1">
-                  <p className="px-3 py-1 text-2xs font-medium text-slate-400">{t(cat.nameKey)}</p>
-                </div>
-              ))}
-              <p className="px-3 py-2 text-sm text-slate-500 dark:text-slate-400">{t('search.hint')}</p>
-            </div>
-          )}
+  <div className="py-3">
+    <p className="px-3 pb-2 text-2xs font-semibold uppercase tracking-wider text-slate-400">
+      Popular tools
+    </p>
 
-          {suggestions.length > 0 && (
+    {categories.slice(0, 3).map((cat) => (
+      <Link
+        key={cat.id}
+        to={`/categories/${cat.slug}`}
+        onClick={onClose}
+        className="mb-1 block rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-surface-dark-muted"
+      >
+        {t(cat.nameKey)}
+      </Link>
+    ))}
+  </div>
+)}
             <div className="mb-2 border-b border-slate-100 pb-2 dark:border-surface-dark-border">
               <p className="px-3 py-1 text-2xs font-semibold uppercase tracking-wider text-slate-400">Suggestions</p>
               {suggestions.map((s) => (
@@ -120,8 +119,6 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
                 </button>
               ))}
             </div>
-          )}
-
           {results.length > 0 && (
             <div>
               <p className="px-3 py-1 text-2xs font-semibold uppercase tracking-wider text-slate-400">{t('search.results')}</p>
@@ -156,13 +153,14 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
           )}
         </div>
 
-        <div className="flex items-center justify-between border-t border-slate-200/80 px-4 py-2.5 text-2xs text-slate-400 dark:border-surface-dark-border">
+               <div className="flex items-center justify-between border-t border-slate-200/80 px-4 py-2.5 text-2xs text-slate-400 dark:border-surface-dark-border">
           <span className="flex items-center gap-2">
             <kbd className="rounded border border-slate-200 px-1.5 py-0.5 font-mono dark:border-surface-dark-border">↑↓</kbd>
             to navigate
             <kbd className="ms-2 rounded border border-slate-200 px-1.5 py-0.5 font-mono dark:border-surface-dark-border">↵</kbd>
             to select
           </span>
+
           <button
             onClick={() => {
               navigate('/tools');
