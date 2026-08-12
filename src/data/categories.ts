@@ -36,27 +36,27 @@ export const categories: Category[] = [
     descriptionKey: 'cat.design.desc',
     icon: 'Palette',
   },
-  {
-    id: 'calculators',
-    slug: 'calculators',
-    nameKey: 'cat.calculators',
-    descriptionKey: 'cat.calculators.desc',
-    icon: 'Calculator',
-  },
-  {
-    id: 'converters',
-    slug: 'converters',
-    nameKey: 'cat.converters',
-    descriptionKey: 'cat.converters.desc',
-    icon: 'Repeat',
-  },
-  {
-    id: 'academic',
-    slug: 'academic',
-    nameKey: 'cat.academic',
-    descriptionKey: 'cat.academic.desc',
-    icon: 'GraduationCap',
-  },
+  //  {
+//    id: 'calculators',
+//    slug: 'calculators',
+//    nameKey: 'cat.calculators',
+//    descriptionKey: 'cat.calculators.desc',
+//    icon: 'Calculator',
+//  },
+//  {
+//    id: 'converters',
+//    slug: 'converters',
+//    nameKey: 'cat.converters',
+//    descriptionKey: 'cat.converters.desc',
+//    icon: 'Repeat',
+//  },
+//  {
+//    id: 'academic',
+//    slug: 'academic',
+//    nameKey: 'cat.academic',
+//    descriptionKey: 'cat.academic.desc',
+//    icon: 'GraduationCap',
+//  },
 ];
 
 export function getCategory(id: string): Category | undefined {
