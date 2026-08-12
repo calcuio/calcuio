@@ -120,12 +120,17 @@ export function HomePage() {
                 )}
               </div>
               <div className="mt-3 flex flex-wrap justify-center gap-2">
-                {['Compress an image', 'Convert HEIC to JPG', 'Make a PDF smaller', 'Format JSON', 'Count words'].map((ex) => (
-                  <button key={ex} type="button" onClick={() => setQuery(ex)} className="chip chip-neutral hover:chip-brand transition-colors">
-                    {ex}
-                  </button>
-                ))}
-              </div>
+  {popular.slice(0, 5).map((tool) => (
+    <button
+      key={tool.id}
+      type="button"
+      onClick={() => setQuery(tool.name)}
+      className="chip chip-neutral hover:chip-brand transition-colors"
+    >
+      {tool.name}
+    </button>
+  ))}
+</div>
             </form>
 
             <div className="mt-6 flex items-center justify-center gap-2 text-sm text-slate-400">
