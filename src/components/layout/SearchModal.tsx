@@ -106,19 +106,24 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
     ))}
   </div>
 )}
-            <div className="mb-2 border-b border-slate-100 pb-2 dark:border-surface-dark-border">
-              <p className="px-3 py-1 text-2xs font-semibold uppercase tracking-wider text-slate-400">Suggestions</p>
-              {suggestions.map((s) => (
-                <button
-                  key={s}
-                  onClick={() => setQuery(s)}
-                  className="flex w-full items-center gap-2 rounded-lg px-3 py-1.5 text-sm text-slate-600 transition-colors hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-surface-dark-muted"
-                >
-                  <Search size={13} className="text-slate-400" />
-                  {s}
-                </button>
-              ))}
-            </div>
+            {suggestions.length > 0 && (
+  <div className="mb-2 border-b border-slate-100 pb-2 dark:border-surface-dark-border">
+    <p className="px-3 py-1 text-2xs font-semibold uppercase tracking-wider text-slate-400">
+      Suggestions
+    </p>
+
+    {suggestions.map((s) => (
+      <button
+        key={s}
+        onClick={() => setQuery(s)}
+        className="flex w-full items-center gap-2 rounded-lg px-3 py-1.5 text-sm text-slate-600 transition-colors hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-surface-dark-muted"
+      >
+        <Search size={13} className="text-slate-400" />
+        {s}
+      </button>
+    ))}
+  </div>
+)}
           {results.length > 0 && (
             <div>
               <p className="px-3 py-1 text-2xs font-semibold uppercase tracking-wider text-slate-400">{t('search.results')}</p>
