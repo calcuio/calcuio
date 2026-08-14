@@ -13,7 +13,7 @@ function LastUpdated() { const { t } = useI18n(); return <div className="mb-8 fl
 
 function ContentPage({ prefix, count }: { prefix: string; count: number }) {
   const { t } = useI18n();
-  return <div className="max-w-4xl"><LastUpdated /><div className="prose-calcuio space-y-8">{Array.from({ length: count }, (_, i) => <section key={i}><h2>{t(`${prefix}.section${i + 1}`)}</h2><p>{t(`${prefix}.body`)}</p></section>)}</div></div>;
+  return <div className="max-w-4xl"><LastUpdated /><div className="prose-calcuio space-y-8">{Array.from({ length: count }, (_, i) => <section key={i}><h2>{t(`${prefix}.s${i + 1}.title`)}</h2><p>{t(`${prefix}.s${i + 1}.body`)}</p></section>)}</div></div>;
 }
 
 function useStaticSeo(prefix: string, canonical: string) {
