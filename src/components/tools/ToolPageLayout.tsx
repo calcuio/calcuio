@@ -1,16 +1,25 @@
 import { useEffect, type ReactNode } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
-import { Shield, Lightbulb, ListChecks } from 'lucide-react';
+import { Shield, Lightbulb } from 'lucide-react';
+
 import type { Tool } from '@/types';
 import { getTool } from '@/data/tools';
 import { getCategory } from '@/data/categories';
 import { useI18n } from '@/i18n/I18nContext';
-import { useSEO, toolJsonLd, faqJsonLd, breadcrumbJsonLd } from '@/lib/seo';
+
+import {
+  useSEO,
+  toolJsonLd,
+  faqJsonLd,
+  breadcrumbJsonLd,
+} from '@/lib/seo';
+
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { FavoriteButton } from '@/components/tools/FavoriteButton';
 import { RelatedTools } from '@/components/tools/RelatedTools';
 import { FAQ } from '@/components/ui/FAQ';
 import { ToolIcon } from '@/components/tools/ToolIcon';
+
 import { track } from '@/lib/analytics';
 import { addRecent } from '@/lib/storage';
 
@@ -18,16 +27,23 @@ interface ToolPageLayoutProps {
   children: ReactNode;
 }
 
-export function ToolPageLayout({ children }: ToolPageLayoutProps) {
+export function ToolPageLayout({
+  children,
+}: ToolPageLayoutProps) {
   const { slug } = useParams<{ slug: string }>();
   const { t } = useI18n();
+
   const tool = slug ? getTool(slug) : undefined;
 
   useEffect(() => {
-    if (tool) {
-      track('tool_view', { tool_id: tool.id, tool_slug: tool.slug });
-      addRecent(tool.id);
-    }
+    if (!tool) return;
+
+    track('tool_view', {
+      tool_id: tool.id,
+      tool_slug: tool.slug,
+    });
+
+    addRecent(tool.id);
   }, [tool]);
 
   if (!tool) {
@@ -35,22 +51,83 @@ export function ToolPageLayout({ children }: ToolPageLayoutProps) {
   }
 
   const cat = getCategory(tool.category);
-  const seoTitle = tool.seoTitle || `${tool.name} — Free Online Tool | Calcuio`;
-  const seoDesc = tool.seoDescription || tool.description;
-  const canonical = `/tools/${tool.slug}`;
-  const faqs = tool.faq.map((f) => ({ q: t(f.qKey), a: t(f.aKey) }));
 
-  const jsonLd = [
-    toolJsonLd(tool),
-    faqJsonLd(faqs),
+  /*
+   * =========================================================
+   * SEO
+   * =========================================================
+   */
+
+  const seoTitle =
+    tool.seoTitle ||
+    `${tool.name} — Free Online Tool | Calcuio`;
+
+  const seoDesc =
+    tool.seoDescription ||
+    tool.description;
+
+  const canonical = `/tools/${tool.slug}`;
+
+  /*
+   * Tool FAQ
+   */
+  const faqs = (tool.faq || []).map((f) => ({
+    q: t(f.qKey),
+    a: t(f.aKey),
+  }));
+
+  /*
+   * Structured data
+   */
+  const toolSchema = toolJsonLd(tool);
+
+  const schemas: object[] = [
+    toolSchema,
     breadcrumbJsonLd([
-      { name: 'Calcuio', url: '/' },
-      { name: t('nav.tools'), url: '/tools' },
-      { name: tool.name, url: `/tools/${tool.slug}` },
+      {
+        name: 'Calcuio',
+        url: '/',
+      },
+      {
+        name: t('nav.tools'),
+        url: '/tools',
+      },
+      ...(cat
+        ? [
+            {
+              name: t(cat.nameKey),
+              url: `/categories/${cat.slug}`,
+            },
+          ]
+        : []),
+      {
+        name: tool.name,
+        url: `/tools/${tool.slug}`,
+      },
     ]),
   ];
 
-  return <ToolPageContent tool={tool} seoTitle={seoTitle} seoDesc={seoDesc} canonical={canonical} jsonLd={jsonLd} cat={cat} faqs={faqs}>{children}</ToolPageContent>;
+  /*
+   * Only add FAQ structured data when
+   * the tool actually has FAQs.
+   */
+  if (faqs.length > 0) {
+    schemas.push(faqJsonLd(faqs));
+  }
+
+  return (
+    <ToolPageContent
+      tool={tool}
+      seoTitle={seoTitle}
+      seoDesc={seoDesc}
+      canonical={canonical}
+      jsonLd={schemas}
+      cat={cat}
+      faqs={faqs}
+    >
+      {children}
+    </ToolPageContent>
+  );
 }
 
 interface ToolPageContentProps {
@@ -64,82 +141,220 @@ interface ToolPageContentProps {
   children: ReactNode;
 }
 
-function ToolPageContent({ tool, seoTitle, seoDesc, canonical, jsonLd, cat, faqs, children }: ToolPageContentProps) {
+function ToolPageContent({
+  tool,
+  seoTitle,
+  seoDesc,
+  canonical,
+  jsonLd,
+  cat,
+  faqs,
+  children,
+}: ToolPageContentProps) {
   const { t } = useI18n();
 
   useSEO({
     title: seoTitle,
     description: seoDesc,
     canonical,
-    jsonLd: jsonLd[0],
+    jsonLd,
   });
 
   return (
     <div className="container-page py-6 sm:py-8">
+
+      {/* =====================================================
+          Breadcrumbs
+      ===================================================== */}
+
       <Breadcrumbs
         items={[
-          { label: t('app.name'), to: '/' },
-          { label: t('nav.tools'), to: '/tools' },
-          ...(cat ? [{ label: t(cat.nameKey), to: `/categories/${cat.slug}` }] : []),
-          { label: tool.name },
+          {
+            label: t('app.name'),
+            to: '/',
+          },
+          {
+            label: t('nav.tools'),
+            to: '/tools',
+          },
+          ...(cat
+            ? [
+                {
+                  label: t(cat.nameKey),
+                  to: `/categories/${cat.slug}`,
+                },
+              ]
+            : []),
+          {
+            label: tool.name,
+          },
         ]}
       />
 
+      {/* =====================================================
+          Tool Header
+      ===================================================== */}
+
       <div className="mb-6 flex items-start justify-between gap-4">
-        <div className="flex items-start gap-3">
+
+        <div className="flex min-w-0 items-start gap-3">
+
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-500/15 dark:text-brand-400">
-            <ToolIcon name={tool.icon} size={21} />
+            <ToolIcon
+              name={tool.icon}
+              size={21}
+            />
           </div>
-          <div>
-            <h1 className="text-xl font-bold text-slate-900 dark:text-white sm:text-2xl">{tool.name}</h1>
-            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{tool.description}</p>
+
+          <div className="min-w-0">
+
+            <h1 className="text-xl font-bold text-slate-900 dark:text-white sm:text-2xl">
+              {tool.name}
+            </h1>
+
+            <p className="mt-1 text-sm leading-6 text-slate-500 dark:text-slate-400">
+              {tool.description}
+            </p>
+
           </div>
+
         </div>
-        <FavoriteButton toolId={tool.id} showLabel />
+
+        <FavoriteButton
+          toolId={tool.id}
+          showLabel
+        />
+
       </div>
 
-      <div className="card p-5 sm:p-6">{children}</div>
+      {/* =====================================================
+          Main Tool
+      ===================================================== */}
+
+      <div className="card p-5 sm:p-6">
+        {children}
+      </div>
+
+      {/* =====================================================
+          Tool Information
+      ===================================================== */}
 
       <div className="mt-8 grid gap-6 lg:grid-cols-3">
+
+        {/* Main information */}
+
         <div className="space-y-6 lg:col-span-2">
-          <section>
-            <h2 className="mb-2 text-base font-semibold text-slate-900 dark:text-white">{t('tool.how')}</h2>
-            <p className="prose-calcuio">{t(tool.howItWorksKey)}</p>
-          </section>
 
-          {tool.supportedFormats && tool.supportedFormats.length > 0 && (
-            <section>
-              <h2 className="mb-2 text-base font-semibold text-slate-900 dark:text-white">{t('tool.formats')}</h2>
-              <div className="flex flex-wrap gap-2">
-                {tool.supportedFormats.map((fmt) => (
-                  <span key={fmt} className="chip chip-neutral">{fmt}</span>
-                ))}
-              </div>
-            </section>
-          )}
+          {/* How it works */}
 
           <section>
-            <h2 className="mb-2 flex items-center gap-1.5 text-base font-semibold text-slate-900 dark:text-white">
-              <Lightbulb size={16} className="text-amber-500" />
-              {t('tool.tips')}
+            <h2 className="mb-2 text-base font-semibold text-slate-900 dark:text-white">
+              {t('tool.how')}
             </h2>
-            <p className="prose-calcuio">{t(tool.tipsKey)}</p>
+
+            <p className="prose-calcuio">
+              {t(tool.howItWorksKey)}
+            </p>
           </section>
+
+          {/* Supported formats */}
+
+          {tool.supportedFormats &&
+            tool.supportedFormats.length > 0 && (
+              <section>
+
+                <h2 className="mb-2 text-base font-semibold text-slate-900 dark:text-white">
+                  {t('tool.formats')}
+                </h2>
+
+                <div className="flex flex-wrap gap-2">
+
+                  {tool.supportedFormats.map((fmt) => (
+                    <span
+                      key={fmt}
+                      className="chip chip-neutral"
+                    >
+                      {fmt}
+                    </span>
+                  ))}
+
+                </div>
+
+              </section>
+            )}
+
+          {/* Tips */}
+
+          <section>
+
+            <h2 className="mb-2 flex items-center gap-1.5 text-base font-semibold text-slate-900 dark:text-white">
+
+              <Lightbulb
+                size={16}
+                className="text-amber-500"
+              />
+
+              {t('tool.tips')}
+
+            </h2>
+
+            <p className="prose-calcuio">
+              {t(tool.tipsKey)}
+            </p>
+
+          </section>
+
         </div>
+
+        {/* Privacy information */}
 
         <div className="space-y-6">
+
           <section className="card p-4">
+
             <h2 className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-slate-900 dark:text-white">
-              <Shield size={15} className="text-accent-500" />
+
+              <Shield
+                size={15}
+                className="text-accent-500"
+              />
+
               {t('tool.privacy.info')}
+
             </h2>
-            <p className="text-xs leading-relaxed text-slate-500 dark:text-slate-400">{t(tool.privacyKey)}</p>
+
+            <p className="text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+              {t(tool.privacyKey)}
+            </p>
+
           </section>
+
         </div>
+
       </div>
 
-      <FAQ questions={faqs} />
-      <RelatedTools tool={tool} />
+      {/* =====================================================
+          FAQ
+      ===================================================== */}
+
+      {faqs.length > 0 && (
+        <section className="mt-10">
+
+          <FAQ
+            questions={faqs}
+          />
+
+        </section>
+      )}
+
+      {/* =====================================================
+          Related Tools
+      ===================================================== */}
+
+      <RelatedTools
+        tool={tool}
+      />
+
     </div>
   );
 }
