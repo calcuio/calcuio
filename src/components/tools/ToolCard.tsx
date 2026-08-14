@@ -39,7 +39,7 @@ export function ToolCard({ tool, showFavorite = false }: ToolCardProps) {
           </span>
         )}
         {tool.isNew && (
-          <span className="chip chip-accent">New</span>
+          <span className="chip chip-accent">{t('tool.new')}</span>
         )}
       </div>
     </Link>

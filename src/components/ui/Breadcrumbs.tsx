@@ -8,10 +8,10 @@ interface BreadcrumbItem {
 }
 
 export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
-  const { dir } = useI18n();
+  const { dir, t } = useI18n();
 
   return (
-    <nav aria-label="Breadcrumb" className="mb-4">
+    <nav aria-label={t('common.breadcrumb')} className="mb-4">
       <ol className="flex items-center gap-1.5 text-xs text-slate-400">
         {items.map((item, i) => (
           <li key={i} className="flex items-center gap-1.5">

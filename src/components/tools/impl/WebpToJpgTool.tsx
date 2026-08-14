@@ -68,7 +68,7 @@ export function WebpToJpgTool() {
             <div className="flex-1 space-y-3">
               <p className="text-sm text-slate-500">{file.name} — {formatBytes(file.size)}</p>
               <div>
-                <label className="label-base">Background color (for transparency)</label>
+                <label className="label-base">{t('tool.backgroundColorTransparency')}</label>
                 <div className="flex items-center gap-2">
                   <input type="color" value={bgColor} onChange={(e) => setBgColor(e.target.value)} className="h-10 w-14 cursor-pointer rounded-lg border border-slate-200 dark:border-surface-dark-border" />
                   <Input value={bgColor} onChange={(e) => setBgColor(e.target.value)} className="flex-1" />

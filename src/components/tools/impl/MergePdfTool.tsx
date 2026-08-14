@@ -90,9 +90,9 @@ export function MergePdfTool() {
                   <p className="text-2xs text-slate-400">{formatBytes(f.file.size)}</p>
                 </div>
                 <div className="flex gap-1">
-                  <button onClick={() => move(i, -1)} disabled={i === 0} className="btn btn-ghost p-1.5" aria-label="Move up"><ArrowUp size={14} /></button>
-                  <button onClick={() => move(i, 1)} disabled={i === files.length - 1} className="btn btn-ghost p-1.5" aria-label="Move down"><ArrowDown size={14} /></button>
-                  <button onClick={() => remove(i)} className="btn btn-ghost p-1.5 text-red-500" aria-label="Remove"><Trash2 size={14} /></button>
+                  <button onClick={() => move(i, -1)} disabled={i === 0} className="btn btn-ghost p-1.5" aria-label={t('tool.moveUp')}><ArrowUp size={14} /></button>
+                  <button onClick={() => move(i, 1)} disabled={i === files.length - 1} className="btn btn-ghost p-1.5" aria-label={t('tool.moveDown')}><ArrowDown size={14} /></button>
+                  <button onClick={() => remove(i)} className="btn btn-ghost p-1.5 text-red-500" aria-label={t('tool.remove')}><Trash2 size={14} /></button>
                 </div>
               </div>
             ))}

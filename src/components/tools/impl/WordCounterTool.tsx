@@ -34,7 +34,7 @@ export function WordCounterTool() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Editor</label>
+        <label className="text-sm font-medium text-slate-700 dark:text-slate-300">{t('tool.editor')}</label>
         <div className="flex gap-2">
           <CopyButton text={text} size="sm" />
           <button onClick={() => setText('')} className="btn btn-ghost text-xs">{t('tool.clear')}</button>
@@ -43,7 +43,7 @@ export function WordCounterTool() {
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="Start typing or paste your text here…"
+        placeholder={t('tool.textHerePlaceholder')}
         className="input-base scrollbar-thin h-56 resize-y text-base"
         autoFocus
       />
@@ -51,9 +51,9 @@ export function WordCounterTool() {
         {[
           { label: t('tool.words'), value: stats.words },
           { label: t('tool.chars'), value: stats.chars },
-          { label: `${t('tool.chars')} (no spaces)`, value: stats.charsNoSpaces },
-          { label: 'Sentences', value: stats.sentences },
-          { label: 'Paragraphs', value: stats.paragraphs },
+          { label: t('tool.noSpaces'), value: stats.charsNoSpaces },
+          { label: t('tool.sentences'), value: stats.sentences },
+          { label: t('tool.paragraphs'), value: stats.paragraphs },
           { label: t('tool.lines'), value: stats.lines },
         ].map((stat) => (
           <div key={stat.label} className="card p-3 text-center">
@@ -63,8 +63,8 @@ export function WordCounterTool() {
         ))}
       </div>
       <div className="flex gap-4 text-sm text-slate-500 dark:text-slate-400">
-        {stats.words > 0 && <span>~{Math.ceil(stats.words / 200)} min read</span>}
-        {stats.chars > 0 && <span>~{Math.round(stats.words * 5)} keystrokes</span>}
+        {stats.words > 0 && <span>~{Math.ceil(stats.words / 200)} {t('tool.readTime')}</span>}
+        {stats.chars > 0 && <span>~{Math.round(stats.words * 5)} {t('tool.keystrokes')}</span>}
       </div>
     </div>
   );

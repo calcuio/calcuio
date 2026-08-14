@@ -33,21 +33,21 @@ export function UuidGeneratorTool() {
     <div className="space-y-4">
       <div className="flex flex-wrap items-end gap-3">
         <div>
-          <label className="label-base">Count (1–100)</label>
+          <label className="label-base">{t('tool.count')}</label>
           <input type="number" min={1} max={100} value={count} onChange={(e) => setCount(Math.max(1, Math.min(100, Number(e.target.value))))} className="input-base w-32" />
         </div>
         <label className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
           <input type="checkbox" checked={uppercase} onChange={(e) => setUppercase(e.target.checked)} className="accent-brand-500" />
-          Uppercase
+          {t('tool.uppercase')}
         </label>
-        <button onClick={generate} className="btn btn-primary">Generate</button>
+        <button onClick={generate} className="btn btn-primary">{t('tool.generate')}</button>
       </div>
 
       {uuids.length > 0 && (
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-sm text-slate-500">{uuids.length} UUID{uuids.length !== 1 ? 's' : ''} generated</span>
-            <button onClick={copyAll} className="btn btn-secondary text-xs">Copy all</button>
+            <span className="text-sm text-slate-500">{uuids.length} {t('tool.uuidsGenerated')}</span>
+            <button onClick={copyAll} className="btn btn-secondary text-xs">{t('tool.copyAll')}</button>
           </div>
           <div className="space-y-1.5">
             {uuids.map((uuid, i) => (

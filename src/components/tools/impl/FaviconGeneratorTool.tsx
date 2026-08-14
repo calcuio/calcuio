@@ -62,7 +62,7 @@ export function FaviconGeneratorTool() {
         <>
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="label-base">Text or emoji</label>
+              <label className="label-base">{t('tool.textOrEmoji')}</label>
               <input type="text" value={text} onChange={(e) => setText(e.target.value)} maxLength={2} className="input-base" placeholder="C" />
             </div>
             <div>
@@ -70,14 +70,14 @@ export function FaviconGeneratorTool() {
               <input type="range" min="30" max="90" value={fontSize} onChange={(e) => setFontSize(Number(e.target.value))} className="w-full accent-brand-500" />
             </div>
             <div>
-              <label className="label-base">Background color</label>
+              <label className="label-base">{t('tool.backgroundColor')}</label>
               <div className="flex items-center gap-2">
                 <input type="color" value={bgColor} onChange={(e) => setBgColor(e.target.value)} className="h-10 w-14 cursor-pointer rounded-lg border border-slate-200 dark:border-surface-dark-border" />
                 <input type="text" value={bgColor} onChange={(e) => setBgColor(e.target.value)} className="input-base flex-1" />
               </div>
             </div>
             <div>
-              <label className="label-base">Text color</label>
+              <label className="label-base">{t('tool.textColor')}</label>
               <div className="flex items-center gap-2">
                 <input type="color" value={textColor} onChange={(e) => setTextColor(e.target.value)} className="h-10 w-14 cursor-pointer rounded-lg border border-slate-200 dark:border-surface-dark-border" />
                 <input type="text" value={textColor} onChange={(e) => setTextColor(e.target.value)} className="input-base flex-1" />
@@ -89,7 +89,7 @@ export function FaviconGeneratorTool() {
             <div className="flex h-16 w-16 items-center justify-center rounded-xl text-2xl font-bold" style={{ backgroundColor: bgColor, color: textColor, fontSize: `${fontSize * 0.16}px` }}>
               {text.slice(0, 2)}
             </div>
-            <p className="text-xs text-slate-400">Live preview (64×64)</p>
+            <p className="text-xs text-slate-400">{t('tool.livePreview')}</p>
           </div>
           <div className="flex gap-2.5">
             <button onClick={generate} className="btn btn-primary">{t('tool.process')}</button>

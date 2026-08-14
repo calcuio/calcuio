@@ -4,7 +4,7 @@ import { track } from '@/lib/analytics';
 import { useState, useRef, useEffect } from 'react';
 
 export function LanguageSwitcher() {
-  const { locale, setLocale, locales, localeNames } = useI18n();
+  const { locale, setLocale, locales, localeNames, t } = useI18n();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -27,8 +27,8 @@ export function LanguageSwitcher() {
       <button
         onClick={() => setOpen(!open)}
         className="btn btn-ghost p-2"
-        aria-label="Language"
-        title="Language"
+        aria-label={t('nav.language')}
+        title={t('nav.language')}
       >
         <Globe size={18} />
       </button>

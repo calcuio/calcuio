@@ -110,7 +110,7 @@ export function PdfCompressorTool() {
               { value: '80', label: 'High quality (larger file)' },
             ]}
           />
-          {processing && <div><ProgressBar value={progress} /><p className="mt-2 text-xs text-slate-400">Re-rendering PDF pages…</p></div>}
+          {processing && <div><ProgressBar value={progress} /><p className="mt-2 text-xs text-slate-400">{t('tool.rerenderingPdfPages')}</p></div>}
           <div className="flex gap-2.5">
             <button onClick={compress} disabled={processing} className="btn btn-primary">{processing ? t('tool.processing') : t('tool.process')}</button>
             <button onClick={reset} className="btn btn-ghost">{t('tool.reset')}</button>

@@ -92,7 +92,7 @@ export function PdfToJpgTool() {
             <p className="text-sm font-medium text-slate-700 dark:text-slate-200">{file.name}</p>
             <p className="text-xs text-slate-400">{formatBytes(file.size)}</p>
           </div>
-          {processing && <div><ProgressBar value={progress} /><p className="mt-2 text-xs text-slate-400">Rendering PDF pages…</p></div>}
+          {processing && <div><ProgressBar value={progress} /><p className="mt-2 text-xs text-slate-400">{t('tool.processingPdfPages')}</p></div>}
           <div className="flex gap-2.5">
             <button onClick={convert} disabled={processing} className="btn btn-primary">{processing ? t('tool.processing') : t('tool.process')}</button>
             <button onClick={reset} className="btn btn-ghost">{t('tool.reset')}</button>

@@ -41,7 +41,7 @@ export function Header({ onOpenSearch, onOpenMobileMenu }: HeaderProps) {
     >
       <div className="container-wide flex h-12 items-center justify-between gap-4 sm:h-13">
         <div className="flex items-center gap-1">
-          <Link to="/" className="flex items-center rounded-lg" aria-label="Calcuio">
+          <Link to="/" className="flex items-center rounded-lg" aria-label={t('app.name')}>
             <Logo size={24} />
           </Link>
           <nav className="ms-6 hidden items-center gap-1 md:flex">

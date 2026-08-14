@@ -65,7 +65,7 @@ export function JsonFormatterTool() {
               <select value={indent} onChange={(e) => setIndent(Number(e.target.value))} className="rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs dark:border-surface-dark-border dark:bg-surface-dark-muted">
                 <option value={2}>2 spaces</option>
                 <option value={4}>4 spaces</option>
-                <option value={0}>Tabs</option>
+                <option value={0}>{t('tool.tabs')}</option>
               </select>
             </div>
           </div>
@@ -85,7 +85,7 @@ export function JsonFormatterTool() {
           <textarea
             value={output}
             readOnly
-            placeholder="Formatted JSON will appear here"
+            placeholder={t('tool.resultPlaceholder')}
             className="input-base scrollbar-thin h-64 resize-none font-mono text-sm lg:h-80"
             spellCheck={false}
           />
@@ -94,8 +94,8 @@ export function JsonFormatterTool() {
       </div>
       <div className="flex flex-wrap gap-2.5">
         <button onClick={format} className="btn btn-primary">{t('tool.process')} (Beautify)</button>
-        <button onClick={minify} className="btn btn-secondary">Minify</button>
-        {output && <button onClick={swap} className="btn btn-outline">Use output as input</button>}
+        <button onClick={minify} className="btn btn-secondary">{t('tool.minify')}</button>
+        {output && <button onClick={swap} className="btn btn-outline">{t('tool.useOutputAsInput')}</button>}
         <button onClick={clear} className="btn btn-ghost">{t('tool.clear')}</button>
       </div>
     </div>

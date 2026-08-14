@@ -25,15 +25,8 @@ function convertCase(text: string, type: CaseType): string {
   }
 }
 
-const CASES: { type: CaseType; label: string }[] = [
-  { type: 'upper', label: 'UPPERCASE' },
-  { type: 'lower', label: 'lowercase' },
-  { type: 'title', label: 'Title Case' },
-  { type: 'sentence', label: 'Sentence case' },
-  { type: 'camel', label: 'camelCase' },
-  { type: 'pascal', label: 'PascalCase' },
-  { type: 'snake', label: 'snake_case' },
-  { type: 'kebab', label: 'kebab-case' },
+const CASES: { type: CaseType; labelKey: string }[] = [
+  { type: 'upper', labelKey: 'case.upper' }, { type: 'lower', labelKey: 'case.lower' }, { type: 'title', labelKey: 'case.title' }, { type: 'sentence', labelKey: 'case.sentence' }, { type: 'camel', labelKey: 'case.camel' }, { type: 'pascal', labelKey: 'case.pascal' }, { type: 'snake', labelKey: 'case.snake' }, { type: 'kebab', labelKey: 'case.kebab' },
 ];
 
 export function CaseConverterTool() {
@@ -47,12 +40,12 @@ export function CaseConverterTool() {
     <div className="space-y-4">
       <div>
         <label className="text-sm font-medium text-slate-700 dark:text-slate-300">{t('tool.input')}</label>
-        <textarea value={text} onChange={(e) => { setText(e.target.value); if (e.target.value) track('tool_start', { tool_id: 'case-converter' }); }} placeholder="Type or paste text to convert…" className="input-base scrollbar-thin h-32 resize-y" autoFocus />
+        <textarea value={text} onChange={(e) => { setText(e.target.value); if (e.target.value) track('tool_start', { tool_id: 'case-converter' }); }} placeholder={t('tool.convertInputPlaceholder')} className="input-base scrollbar-thin h-32 resize-y" autoFocus />
       </div>
       <div className="flex flex-wrap gap-2">
         {CASES.map((c) => (
           <button key={c.type} onClick={() => setActiveCase(c.type)} className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${activeCase === c.type ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-surface-dark-muted dark:text-slate-300'}`}>
-            {c.label}
+            {t(c.labelKey)}
           </button>
         ))}
       </div>
@@ -61,7 +54,7 @@ export function CaseConverterTool() {
           <label className="text-sm font-medium text-slate-700 dark:text-slate-300">{t('tool.output')}</label>
           {output && <CopyButton text={output} size="sm" />}
         </div>
-        <textarea value={output} readOnly placeholder="Converted text will appear here…" className="input-base scrollbar-thin h-32 resize-y font-mono text-sm" />
+        <textarea value={output} readOnly placeholder={t('tool.convertOutputPlaceholder')} className="input-base scrollbar-thin h-32 resize-y font-mono text-sm" />
       </div>
       <button onClick={() => { setText(''); }} className="btn btn-ghost">{t('tool.clear')}</button>
     </div>

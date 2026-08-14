@@ -39,23 +39,23 @@ export function Base64Tool() {
     <div className="space-y-4">
       <div className="flex items-center gap-2">
         <div className="flex rounded-xl border border-slate-200 p-0.5 dark:border-surface-dark-border">
-          <button onClick={() => setMode('encode')} className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${mode === 'encode' ? 'bg-brand-600 text-white' : 'text-slate-600 dark:text-slate-300'}`}>Encode</button>
-          <button onClick={() => setMode('decode')} className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${mode === 'decode' ? 'bg-brand-600 text-white' : 'text-slate-600 dark:text-slate-300'}`}>Decode</button>
+          <button onClick={() => setMode('encode')} className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${mode === 'encode' ? 'bg-brand-600 text-white' : 'text-slate-600 dark:text-slate-300'}`}>{t('tool.encode')}</button>
+          <button onClick={() => setMode('decode')} className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${mode === 'decode' ? 'bg-brand-600 text-white' : 'text-slate-600 dark:text-slate-300'}`}>{t('tool.decode')}</button>
         </div>
         <button onClick={swap} className="btn btn-ghost p-2" aria-label={t('tool.swap')}><ArrowLeftRight size={16} /></button>
       </div>
       <div className="grid gap-3 lg:grid-cols-2">
         <div>
           <label className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">{t('tool.input')}</label>
-          <textarea value={input} onChange={(e) => { setInput(e.target.value); if (e.target.value) track('tool_start', { tool_id: 'base64-encoder-decoder' }); }} placeholder={mode === 'encode' ? 'Enter text to encode…' : 'Enter Base64 to decode…'} className="input-base scrollbar-thin h-48 resize-y font-mono text-sm" spellCheck={false} />
+          <textarea value={input} onChange={(e) => { setInput(e.target.value); if (e.target.value) track('tool_start', { tool_id: 'base64-encoder-decoder' }); }} placeholder={mode === 'encode' ? t('tool.enterTextToEncode') : t('tool.enterBase64ToDecode')} className="input-base scrollbar-thin h-48 resize-y font-mono text-sm" spellCheck={false} />
         </div>
         <div>
           <div className="mb-1.5 flex items-center justify-between">
             <label className="text-sm font-medium text-slate-700 dark:text-slate-300">{t('tool.output')}</label>
             {output && <CopyButton text={output} size="sm" />}
           </div>
-          <textarea value={output} readOnly placeholder="Result will appear here" className="input-base scrollbar-thin h-48 resize-y font-mono text-sm" spellCheck={false} />
-          {input && !output && <p className="mt-1.5 text-xs text-red-400">{mode === 'decode' ? 'Invalid Base64 input.' : 'Could not encode.'}</p>}
+          <textarea value={output} readOnly placeholder={t('tool.resultPlaceholder')} className="input-base scrollbar-thin h-48 resize-y font-mono text-sm" spellCheck={false} />
+          {input && !output && <p className="mt-1.5 text-xs text-red-400">{mode === 'decode' ? t('tool.invalidBase64') : t('tool.couldNotEncode')}</p>}
         </div>
       </div>
       <button onClick={clear} className="btn btn-ghost">{t('tool.clear')}</button>

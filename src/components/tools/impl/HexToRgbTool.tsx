@@ -45,18 +45,18 @@ export function HexToRgbTool() {
       {mode === 'hex-to-rgb' ? (
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label className="label-base">HEX color</label>
+            <label className="label-base">{t('tool.hexColor')}</label>
             <div className="flex items-center gap-2">
               <input type="color" value={hex} onChange={(e) => setHex(e.target.value)} className="h-10 w-14 cursor-pointer rounded-lg border border-slate-200 dark:border-surface-dark-border" />
               <Input value={hex} onChange={(e) => setHex(e.target.value)} className="flex-1" />
             </div>
           </div>
           <div>
-            <label className="label-base">RGB result</label>
+            <label className="label-base">{t('tool.rgbResult')}</label>
             <div className="flex items-center gap-2">
               <div className="flex-1 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 dark:border-surface-dark-border dark:bg-surface-dark-muted/50">
                 <code className="text-sm font-mono text-slate-700 dark:text-slate-200">
-                  {rgb ? `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})` : 'Invalid HEX'}
+                  {rgb ? `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})` : t('tool.invalidHex')}
                 </code>
               </div>
               {rgb && <CopyButton text={`rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`} size="sm" />}
@@ -66,7 +66,7 @@ export function HexToRgbTool() {
       ) : (
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label className="label-base">RGB values</label>
+            <label className="label-base">{t('tool.rgbValues')}</label>
             <div className="grid grid-cols-3 gap-2">
               <Input label="R" type="number" min={0} max={255} value={r} onChange={(e) => setR(Number(e.target.value))} />
               <Input label="G" type="number" min={0} max={255} value={g} onChange={(e) => setG(Number(e.target.value))} />
@@ -74,7 +74,7 @@ export function HexToRgbTool() {
             </div>
           </div>
           <div>
-            <label className="label-base">HEX result</label>
+            <label className="label-base">{t('tool.hexResult')}</label>
             <div className="flex items-center gap-2">
               <input type="color" value={hexFromRgb} readOnly className="h-10 w-14 rounded-lg border border-slate-200 dark:border-surface-dark-border" />
               <div className="flex-1 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 dark:border-surface-dark-border dark:bg-surface-dark-muted/50">

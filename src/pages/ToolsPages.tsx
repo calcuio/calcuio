@@ -95,7 +95,7 @@ export function CategoryPage() {
   useSEO({ title: cat ? `${t(cat.nameKey)} tools | Calcuio` : 'Category | Calcuio', description: cat ? t(cat.descriptionKey) : '', canonical: `/categories/${slug}` });
 
   if (!cat) {
-    return <div className="container-page py-16 text-center"><p className="text-slate-400">Category not found.</p></div>;
+    return <div className="container-page py-16 text-center"><p className="text-slate-400">{t('common.categoryNotFound')}</p></div>;
   }
 
   const catTools = tools.filter((tool) => tool.category === cat.id);
