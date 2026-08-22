@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Mortgage Calculator",
+    "demand": 9,
+    "growth": 8,
+    "competition": 7,
+    "utilityFit": 10,
+    "evergreen": 10
+  },
+  {
+    "name": "AI ROI Calculator",
+    "demand": 8,
+    "growth": 10,
+    "competition": 6,
+    "utilityFit": 9,
+    "evergreen": 8
+  },
+  {
+    "name": "Random Trend",
+    "demand": 4,
+    "growth": 3,
+    "competition": 9,
+    "utilityFit": 2,
+    "evergreen": 2
+  }
+]

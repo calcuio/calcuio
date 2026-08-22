@@ -1,0 +1,17 @@
+{
+  "generatedAt": "2026-08-18T15:53:28.259Z",
+  "totalSignals": 3,
+  "qualifiedOpportunities": 2,
+  "opportunities": [
+    {
+      "name": "Mortgage Calculator",
+      "score": 8.25,
+      "recommendation": "RESEARCH_MORE"
+    },
+    {
+      "name": "AI ROI Calculator",
+      "score": 8.05,
+      "recommendation": "RESEARCH_MORE"
+    }
+  ]
+}
